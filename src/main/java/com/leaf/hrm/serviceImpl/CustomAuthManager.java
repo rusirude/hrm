@@ -26,15 +26,15 @@ import java.util.Set;
  */
 @Service
 public class CustomAuthManager implements AuthenticationManager{
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-    @Autowired
-    private SysUserDAO sysUserDAO;
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
 
+    private CustomUserDetailsService customUserDetailsService;
+    private SysUserDAO sysUserDAO;
+
+    @Autowired
+    public CustomAuthManager(CustomUserDetailsService customUserDetailsService, SysUserDAO sysUserDAO) {
+        this.customUserDetailsService = customUserDetailsService;
+        this.sysUserDAO = sysUserDAO;
+    }
 
     @Override
     @Transactional
